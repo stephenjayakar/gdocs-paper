@@ -13,3 +13,7 @@ I am not at fault for your fucked up documents. Only use this if you completely 
 2. Click on "Tools/Script Editor".
 3. Paste in this script, and run `onOpen()`
 4. Go to "Utilities/Start GDocs-Paper" and it should be running!
+
+## Roadmap
+* Figure out how to publish a GDoc Plugin
+* `#` -> headers
