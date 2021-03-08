@@ -6,6 +6,7 @@ I am not at fault for your fucked up documents. Only use this if you completely 
 ## Features
 * Monospace backticks to write `code`.
 * Insert in the current date when you write `/date`.
+* `# ` -> header
 
 ## Using (WIP)
 
@@ -16,4 +17,3 @@ I am not at fault for your fucked up documents. Only use this if you completely 
 
 ## Roadmap
 * Figure out how to publish a GDoc Plugin
-* `#` -> headers

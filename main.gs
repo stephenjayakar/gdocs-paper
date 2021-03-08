@@ -50,7 +50,7 @@ const monospaceBackticks = () => {
 // TODO: support more than one #
 const hashtagToHeaders = () => {
   const body = DocumentApp.getActiveDocument().getBody();
-  const pattern = "# ";
+  const pattern = "#* ";
   let found = body.findText(pattern);
   while (found) {
     // only upcase if the # is at the beginning of the line
