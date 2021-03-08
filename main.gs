@@ -6,11 +6,11 @@ const onOpen = () => {
 
 const loopMarkdown = () => {
   while (true) {
-    monospaceBackticks()
-    replaceDateCommand()
-    // TODO: headers with #
+    monospaceBackticks();
+    replaceDateCommand();
+    hashtagToHeaders();
     // TODO: Checkboxes?
-    DocumentApp.getActiveDocument().saveAndClose()
+    DocumentApp.getActiveDocument().saveAndClose();
   }
 }
 
@@ -32,7 +32,7 @@ const monospaceBackticks = () => {
   const pattern = "`.*?`";
   let found = body.findText(pattern);
   while (found) {
-    const element = found.getElement()
+    const element = found.getElement();
     const text = element.asText();
     const start = found.getStartOffset();
     const endInclusive = found.getEndOffsetInclusive();
@@ -43,6 +43,24 @@ const monospaceBackticks = () => {
     text.deleteText(endInclusive, endInclusive);
     text.deleteText(start, start);
     // TODO: add some way to do default style afterwards.
+    found = body.findText(pattern, found);
+  }
+}
+
+// TODO: support more than one #
+const hashtagToHeaders = () => {
+  const body = DocumentApp.getActiveDocument().getBody();
+  const pattern = "# ";
+  let found = body.findText(pattern);
+  while (found) {
+    // only upcase if the # is at the beginning of the line
+    const start = found.getStartOffset()
+    if (start == 0) {
+      const element = found.getElement();
+      const text = element.asText();
+      text.deleteText(start, start + 1);
+      element.getParent().asParagraph().setHeading(DocumentApp.ParagraphHeading.HEADING1);
+    }
     found = body.findText(pattern, found);
   }
 }
