@@ -47,19 +47,44 @@ const monospaceBackticks = () => {
   }
 }
 
-// TODO: support more than one #
 const hashtagToHeaders = () => {
   const body = DocumentApp.getActiveDocument().getBody();
   const pattern = "#* ";
   let found = body.findText(pattern);
   while (found) {
     // only upcase if the # is at the beginning of the line
-    const start = found.getStartOffset()
+    const start = found.getStartOffset();
     if (start == 0) {
+	  const length = found.getEndOffsetInclusive();
       const element = found.getElement();
       const text = element.asText();
-      text.deleteText(start, start + 1);
-      element.getParent().asParagraph().setHeading(DocumentApp.ParagraphHeading.HEADING1);
+      text.deleteText(start, length);
+	  let heading;
+	  switch (length) {
+	  case 1:
+		heading = DocumentApp.ParagraphHeading.HEADING1;
+		break;
+	  case 2:
+		heading = DocumentApp.ParagraphHeading.HEADING2;
+		break;
+	  case 3:
+		heading = DocumentApp.ParagraphHeading.HEADING3;
+		break;
+	  case 4:
+		heading = DocumentApp.ParagraphHeading.HEADING4;
+		break;
+	  case 5:
+		heading = DocumentApp.ParagraphHeading.HEADING5;
+		break;
+	  case 6:
+		heading = DocumentApp.ParagraphHeading.HEADING6;
+		break;
+	  default:
+		heading = null;
+	  }
+	  if (heading) {
+		element.getParent().asParagraph().setHeading(heading);
+	  }
     }
     found = body.findText(pattern, found);
   }

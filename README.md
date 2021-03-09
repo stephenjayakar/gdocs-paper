@@ -6,7 +6,7 @@ I am not at fault for your fucked up documents. Only use this if you completely 
 ## Features
 * Monospace backticks to write `code`.
 * Insert in the current date when you write `/date`.
-* `# ` -> header
+* `#* ` -> appropriate header size
 
 ## Using (WIP)
 
