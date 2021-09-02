@@ -28,7 +28,7 @@ const replaceDateCommand = () => {
 // probably augment this to only operate on selection LOL
 const monospaceBackticks = () => {
   const body = DocumentApp.getActiveDocument().getBody();
-  const background = '#fff2cc';
+  const background = '#efefef';
   const pattern = "`.*?`";
   let found = body.findText(pattern);
   while (found) {
